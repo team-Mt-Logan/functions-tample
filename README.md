@@ -181,9 +181,19 @@ https://console.cloud.google.com/projectselector/iam-admin/serviceaccounts/creat
 export GOOGLE_APPLICATION_CREDENTIALS="credential.json"
 ```
 
+## 実行
+
+```
+python3 main.py
+```
+
 ## デプロイ
 
 以下のコマンドを実行してデプロイします。
+
+```
+make deploy
+```
 
 # テンプレートリポジトリに含まれていないもの
 

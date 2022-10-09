@@ -22,8 +22,8 @@ class Bigquery():
             self.log(
                 "ERROR", f'failed to publish bq: {e}, request: {data}')
 
-        self.log("INFO",
-                 f'success insertion {len(data)} rows to ${self.table_path} ')
+        self.log(
+            "INFO", f'success insertion {len(data)} rows to ${self.table_path}')
 
-    def log(severity, message):
+    def log(self, severity, message):
         print(json.dumps(dict(severity=severity, message=message)))

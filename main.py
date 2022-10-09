@@ -30,27 +30,29 @@ def get_source():
     """
     # 例: GitHub REST API で、Requests のリポジトリをJSON形式で取得する
     r = requests.get("http://api.github.com/repos/psf/requests")
-    return r.json
+    return r.json()
 
 
 def parse(data: Union[dict, list[dict]]):
     """
     取得したデータを必要なデータ形式に整形するリポジトリです。
     要件に応じて必要なデータを取得したり、調整して返してください。
+    返り値はBigQuery の挿入形式にあわせた dicts の list もしくは tuplesである必要があります。
+    詳細は公式ドキュメントを参考にしてください。
+    https://cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_insert_rows
     """
-    parsed_data:  dict[str, dict[str, Union[dict, list]]] = {}
+    parsed_data:  dict[str, Union[str, dict[str, Union[dict, list]]]] = {}
 
     # ここの変換処理を書く
     parsed_data["name"] = data["name"]
     parsed_data["timestamp"] = datetime.datetime.now()
 
-    return parsed_data
+    return [parsed_data]
 
 
-def sample_func(event=None, context=None):
+def main(event=None, context=None):
     """
     Cloud functions で呼びだされる関数です。
-    基本的にデプロイした関数名と同じにしてください。
     また引数の(event=None, context=None)はイベント駆動のCloud functions では必須の引数になります。
     利用しない場合でも消さないでください。
     """
@@ -67,4 +69,4 @@ def sample_func(event=None, context=None):
 
 
 if __name__ == "__main__":
-    sample_func()
+    main()
