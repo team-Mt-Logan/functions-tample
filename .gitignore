@@ -1,0 +1,14 @@
+# config
+.DS_Store
+
+# env
+.env
+credential.json
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+__pycache__/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
