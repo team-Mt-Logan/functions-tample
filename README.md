@@ -122,7 +122,44 @@ cp sample/.env.example sample/.env
 
 ## ローカルでの実行方法
 
+ローカルで実行する場合は BigQuery に挿入する部分で GCP の認証情報が必要になります。
+すでにサービスアカウントが存在している場合は 3 までスキップしてください。
+
+### 1.サービスアカウント作成
+
+https://console.cloud.google.com/projectselector/iam-admin/serviceaccounts/create?supportedpurview=project&hl=ja&_ga=2.143226551.363152718.1665190539-1430318064.1642063974&_gac=1.47845077.1665217994.CjwKCAjwv4SaBhBPEiwA9YzZvIghgnpH4pSJUELtYn340-XgDWZ7GJDELJlQqKmfCpeOjiHrsZ1BUBoCctgQAvD_BwE
+
+1. プロジェクトを選択します。
+2. [サービス アカウント名] フィールドに名前を入力します。Google Cloud コンソールでは、この名前に基づいて [サービス アカウント ID] フィールドに値が設定されます。
+
+3. [サービス アカウントの説明] フィールドに説明を入力します。例: Service account for bigquery writer
+4. [作成して続行] をクリックします。
+5. [ロールを選択] リストでロールを選択し、[BigQuery データ編集者]を選択します
+6. [続行] をクリックします。
+7. [完了] をクリックして、サービス アカウントの作成を完了します。
+
+### 2.サービスアカウントキーを作成
+
+サービス アカウント キーを作成します。
+
+1. Google Cloud コンソールで、作成したサービス アカウントのメールアドレスをクリックします。
+2. [キー] をクリックします。
+3. [鍵を追加]、[新しい鍵を作成] の順にクリックします。
+4. [作成] をクリックします。JSON キーファイルがパソコンにダウンロードされます。
+5. [閉じる] をクリックします。
+6. 作成したキーファイルを作成する`main.py` があるディレクトリに`credential.json` として保存します。
+
+## 環境変数のエクスポート
+
+環境変数 `GOOGLE_APPLICATION_CREDENTIALS` を、サービス アカウント キーが含まれる JSON ファイルのパスに設定します。 この変数は現在のシェル セッションにのみ適用されるため、新しいセッションを開く場合は、変数を再度設定します。
+
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS="credential.json"
+```
+
 ## デプロイ
+
+以下のコマンドを実行してデプロイします。
 
 # テンプレートリポジトリに含まれていないもの
 
