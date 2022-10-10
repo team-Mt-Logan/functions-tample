@@ -35,7 +35,7 @@ def get_source():
 
 def parse(data: Union[dict, list[dict]]):
     """
-    取得したデータを必要なデータ形式に整形するリポジトリです。
+    取得したデータを必要なデータ形式に整形する関数です。
     要件に応じて必要なデータを取得したり、調整して返してください。
     返り値はBigQuery の挿入形式にあわせた dicts の list もしくは tuplesである必要があります。
     詳細は公式ドキュメントを参考にしてください。
@@ -52,9 +52,9 @@ def parse(data: Union[dict, list[dict]]):
 
 def main(event=None, context=None):
     """
-    Cloud functions で呼びだされる関数です。
-    また引数の(event=None, context=None)はイベント駆動のCloud functions では必須の引数になります。
-    利用しない場合でも消さないでください。
+    Cloud functions で呼びだされるエントリー関数です。
+    デプロイ時の --entry-point の値でエントリー関数を変えることができます。--entry-point を指定しない場合はデプロイした関数と同じ名前の関数をエントリーポイントとします。
+    引数の(event=None, context=None)はイベント駆動のCloud functions では必須の引数になりますので利用しない場合でも消さないでください。
     """
 
     # get data

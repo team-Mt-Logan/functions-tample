@@ -34,7 +34,7 @@ https://console.cloud.google.com/cloudscheduler
 
 頻度には unix-cron 形式で呼び出される頻度を設定します。
 このとき、タイムゾーンは日本にすることを忘れないでください。
-<img width="534" alt="スクリーンショット 2022-10-09 14 51 18" src="https://user-images.githubusercontent.com/7589567/194741743-358e15c0-9cb0-480b-954b-fe73ec179496.png">
+<img width="534" alt="スケジューラ定義" src="https://user-images.githubusercontent.com/7589567/194741743-358e15c0-9cb0-480b-954b-fe73ec179496.png">
 
 ### 2-2.実行内容を構成
 
@@ -42,12 +42,12 @@ https://console.cloud.google.com/cloudscheduler
 
 #### 2-2-1.トピックの作成
 
-<img width="520" alt="スクリーンショット 2022-10-09 14 53 13" src="https://user-images.githubusercontent.com/7589567/194741747-314b8993-6f30-4df6-a6b3-faf1b9050847.png">
+<img width="520" alt="トピック作成1" src="https://user-images.githubusercontent.com/7589567/194741747-314b8993-6f30-4df6-a6b3-faf1b9050847.png">
 
 Cloud Pub/Sub トピックはウィンドウ左下の「トピックを作成」から新たに作成します。
 これが functions をトリガーするためのトピックとなります。
 
-<img width="453" alt="スクリーンショット 2022-10-09 14 54 32" src="https://user-images.githubusercontent.com/7589567/194741753-65f4fa93-77e8-4d3f-8f06-ceda9bdefb9a.png">
+<img width="453" alt="トピック作成2" src="https://user-images.githubusercontent.com/7589567/194741753-65f4fa93-77e8-4d3f-8f06-ceda9bdefb9a.png">
 
 メッセージについては今回は利用しないため適当に埋めて問題ないです。
 
@@ -87,21 +87,21 @@ Cloud Pub/Sub トピックはウィンドウ左下の「トピックを作成」
 
 BigQuery のページに行き、プロジェクトの右端にある３点リーダーをクリックしてデータセットを作成する
 
-<img width="411" alt="スクリーンショット 2022-10-09 13 47 42" src="https://user-images.githubusercontent.com/7589567/194741698-613ea1c3-52f3-44a2-b047-051a62d7841d.png">
+<img width="411" alt="BQデータセット作成１" src="https://user-images.githubusercontent.com/7589567/194741698-613ea1c3-52f3-44a2-b047-051a62d7841d.png">
 
-<img width="515" alt="スクリーンショット 2022-10-09 13 49 28" src="https://user-images.githubusercontent.com/7589567/194741708-722c316e-efbb-4660-a317-c04a5b85ed70.png">
+<img width="515" alt="BQデータセット作成2" src="https://user-images.githubusercontent.com/7589567/194741708-722c316e-efbb-4660-a317-c04a5b85ed70.png">
 
 ### 3.テーブルの作成
 
 作成したデータセットの３点リーダーをクリックし「テーブルを作成」をクリック。
 
-<img width="378" alt="スクリーンショット 2022-10-09 13 50 03" src="https://user-images.githubusercontent.com/7589567/194741724-ab9fafbb-4646-4fd4-bd93-62d572715199.png">
+<img width="378" alt="BQテーブル作成1" src="https://user-images.githubusercontent.com/7589567/194741724-ab9fafbb-4646-4fd4-bd93-62d572715199.png">
 
 テーブルにはテーブル名を入力。その他はデフォルトで OK。
 スキーマの部分で「テキストとして編集」をアクティブにします。
 入力ボックスには 1 で作成した json 形式のテキストをペーストします。
 
-<img width="671" alt="スクリーンショット 2022-10-09 13 50 30" src="https://user-images.githubusercontent.com/7589567/194741731-8871606b-d3f6-4afc-930c-813bbf8690df.png">
+<img width="671" alt="BQテーブル作成2" src="https://user-images.githubusercontent.com/7589567/194741731-8871606b-d3f6-4afc-930c-813bbf8690df.png">
 
 テーブルが作成されれば OK。
 問題があった場合は json の形式が間違っていないか確認してください。
@@ -133,7 +133,7 @@ BigQuery のページに行き、プロジェクトの右端にある３点リ�
 `env.example` をコピーして `.env` を作成します。
 
 ```bash
-cp sample/.env.example sample/.env
+cp .env.example .env
 ```
 
 | キー       | 値                                                                                                           |
@@ -157,7 +157,7 @@ https://console.cloud.google.com/projectselector/iam-admin/serviceaccounts/creat
 4. [作成して続行] をクリックします。
 5. [ロールを選択] リストでロールを選択し、[BigQuery データ編集者]を選択します
 
-<img width="751" alt="スクリーンショット 2022-10-09 15 21 06" src="https://user-images.githubusercontent.com/7589567/194741761-8b9e0eb5-b378-4e9d-b643-9b7c3c362ed1.png">
+<img width="751" alt="サービスアカウント権限" src="https://user-images.githubusercontent.com/7589567/194741761-8b9e0eb5-b378-4e9d-b643-9b7c3c362ed1.png">
 
 6. [続行] をクリックします。
 7. [完了] をクリックして、サービス アカウントの作成を完了します。
@@ -171,7 +171,7 @@ https://console.cloud.google.com/projectselector/iam-admin/serviceaccounts/creat
 3. [鍵を追加]、[新しい鍵を作成] の順にクリックします。
 4. [作成] をクリックします。JSON キーファイルがパソコンにダウンロードされます。
 5. [閉じる] をクリックします。
-6. 作成したキーファイルを作成する`main.py` があるディレクトリに`credential.json` として保存します。
+6. 作成したキーファイルを作成する `main.py` があるディレクトリに `credential.json` として保存します。
 
 ## 環境変数のエクスポート
 
@@ -183,17 +183,23 @@ export GOOGLE_APPLICATION_CREDENTIALS="credential.json"
 
 ## 実行
 
-```
+```bash
 python3 main.py
 ```
+
+ローカルマシンでの実行は単体の実行になるため、定期実行はされません。
+完了のログが出て、作成した BigQuery にデータが入っていれば OK です。
 
 ## デプロイ
 
 以下のコマンドを実行してデプロイします。
 
-```
+```bash
 make deploy
 ```
+
+問題がある場合は Cloud Logging を参照してプログラムが正常に動いているか確認してください。
+ローカルで動いているのにデプロイに失敗する場合は、依存関係の不足(requrements.txt の内容不足)が多くの原因として挙げられます。
 
 # テンプレートリポジトリに含まれていないもの
 
